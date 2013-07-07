@@ -23,7 +23,7 @@ listOfFiles.forEach(function (filePath) {
             throw "Filetype has to be css";
         }
         
-        var outputFilePath = filePath + ".output.css"; 
+        var outputFilePath = filePath;// + ".output.css"; 
         var strArray = fileData.split("\n");
         var modifiedStrArray = strArray.slice(0);
         var indexOffset = 0;
@@ -37,7 +37,7 @@ listOfFiles.forEach(function (filePath) {
             }
         });
 
-        fs.writeFile(outputFilePath, modifiedStrArray.join("\n  "), function (error) {
+        fs.writeFile(outputFilePath, modifiedStrArray.join("\n"), function (error) {
             if (error) throw error;
             console.log('File saved: ' + outputFilePath);
         });
