@@ -1,0 +1,12 @@
+{
+  "name": "image-inliner",
+  "version": "0.0.1",
+  "readme": "empty",
+  "main": "./src/main",
+  "bin": {
+    "imageinliner": "./bin/imageinliner"
+  },
+  "dependencies": {
+    "mime": "~1.2.9"
+  }
+}
