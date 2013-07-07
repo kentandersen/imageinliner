@@ -4,9 +4,7 @@ var path = require("path");
 var inline = require("./inline");
 
 
-var fileSizeLimit = 61440;
 var basePath = process.env.PWD;
-
 
 var listOfFiles = process.argv.splice(2);
 if(!listOfFiles) {
@@ -33,13 +31,13 @@ listOfFiles.forEach(function (filePath) {
         strArray.forEach(function(line, index){
             var extracted = reg.exec(line);
             if(extracted && extracted[1]) {
-                if(cssImage = inline.inlineImage(extracted[1], fileBasePath)) {
+                if(cssImage = inline.inlineImage(extracted[1], basePath, fileBasePath)) {
                     modifiedStrArray.splice(++indexOffset + index, 0, cssImage);
                 }
             }
         });
 
-        fs.writeFile(outputFilePath, modifiedStrArray.join("\n"), function (error) {
+        fs.writeFile(outputFilePath, modifiedStrArray.join("\n  "), function (error) {
             if (error) throw error;
             console.log('File saved: ' + outputFilePath);
         });

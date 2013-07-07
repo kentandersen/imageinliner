@@ -2,6 +2,8 @@ var fs = require("fs");
 var mime = require("mime");
 var path = require("path");
 
+var fileSizeLimit = 61440;
+
 function cleanFileData(fileData) {
     // remove linebreaks
     fileData = fileData.replace(/(\r\n|\n|\r)/gm,'');
@@ -15,13 +17,12 @@ function cleanFileData(fileData) {
 }
 
 function createCSSBackgroundImage(mimeType, encoding, fileData) {
-    var css = '    background-image:';
+    var css = 'background-image:';
     css += "url('data:" + mimeType + ";"+ encoding+"," + fileData + "');";
     return css;    
 }
 
-function inlineImage(imagePath, cssFileBasePath) {
-
+function inlineImage(imagePath, basePath, cssFileBasePath) {
     imagePath = imagePath.replace(/\"|\'/g, "");
     imagePath = path.join(basePath, cssFileBasePath, imagePath);
     var mimeType = mime.lookup(imagePath);
@@ -42,4 +43,4 @@ function inlineImage(imagePath, cssFileBasePath) {
     return cssImage;
 }
 
-exports.inline = inlineImage;
+exports.inlineImage = inlineImage;
