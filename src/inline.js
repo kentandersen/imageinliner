@@ -22,9 +22,9 @@ function createCSSBackgroundImage(mimeType, encoding, fileData) {
     return css;    
 }
 
-function inlineImage(imagePath, basePath, cssFileBasePath) {
+function inlineImage(imagePath, cssFileBasePath) {
     imagePath = imagePath.replace(/\"|\'/g, "");
-    imagePath = path.join(basePath, cssFileBasePath, imagePath);
+    imagePath = path.join(cssFileBasePath, imagePath);
     var mimeType = mime.lookup(imagePath);
 
     if(fs.statSync(imagePath).size > fileSizeLimit) {

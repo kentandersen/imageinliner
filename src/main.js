@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var fs = require("fs");
 var mime = require("mime");
 var path = require("path");
@@ -12,7 +14,8 @@ if(!listOfFiles) {
 }
 
 listOfFiles.forEach(function (filePath) {
-    var fileBasePath = path.dirname(filePath);
+    var cssFilePath = path.dirname(path.join(basePath, filePath));
+    console.log(cssFilePath);
     var reg = /background.*:.*url\((.*)\)/;
 
     fs.readFile(filePath, "utf-8", function (err, fileData) {
@@ -23,7 +26,7 @@ listOfFiles.forEach(function (filePath) {
             throw "Filetype has to be css";
         }
         
-        var outputFilePath = filePath;// + ".output.css"; 
+        var outputFilePath = filePath;
         var strArray = fileData.split("\n");
         var modifiedStrArray = strArray.slice(0);
         var indexOffset = 0;
@@ -31,7 +34,7 @@ listOfFiles.forEach(function (filePath) {
         strArray.forEach(function(line, index){
             var extracted = reg.exec(line);
             if(extracted && extracted[1]) {
-                if(cssImage = inline.inlineImage(extracted[1], basePath, fileBasePath)) {
+                if(cssImage = inline.inlineImage(extracted[1], cssFilePath)) {
                     modifiedStrArray.splice(++indexOffset + index, 0, cssImage);
                 }
             }
