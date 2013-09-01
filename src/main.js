@@ -15,7 +15,7 @@ if(!listOfFiles) {
 
 listOfFiles.forEach(function (filePath) {
     var cssFilePath = path.dirname(path.join(basePath, filePath));
-    console.log(cssFilePath);
+
     var reg = /background.*:.*url\((.*)\)/;
 
     fs.readFile(filePath, "utf-8", function (err, fileData) {
