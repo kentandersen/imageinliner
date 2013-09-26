@@ -14,23 +14,28 @@ if(!listOfFiles) {
 }
 
 listOfFiles.forEach(function (filePath) {
-    var cssFilePath = path.dirname(path.join(basePath, filePath));
+    var cssFilePath;
+    if(filePath.charAt(0) === "/") {
+        cssFilePath = path.dirname(filePath);
+    } else {
+        cssFilePath = path.dirname(path.join(basePath, filePath));
+    }
 
     var reg = /background.*:.*url\((.*)\)/;
 
     fs.readFile(filePath, "utf-8", function (err, fileData) {
         if (err) throw err;
-        
+
         var fileMimeType = mime.lookup(filePath);
         if(fileMimeType !== "text/css") {
             throw "Filetype has to be css";
         }
-        
+
         var outputFilePath = filePath;
         var strArray = fileData.split("\n");
         var modifiedStrArray = strArray.slice(0);
         var indexOffset = 0;
-        
+
         strArray.forEach(function(line, index){
             var extracted = reg.exec(line);
             if(extracted && extracted[1]) {
