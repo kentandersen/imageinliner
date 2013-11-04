@@ -6,10 +6,14 @@ body {
 
 
 #main {
-    background-image: url("image3.png");
+    background-image: url("image3.png") ;
 }
 
 
 #main {
     background: transparent url("image4.png") no-repeat center center, transparent url("image5.png") no-repeat center center, transparent url("image6.png") no-repeat center center;
+
+}
+#main {
+    background-image: url("image7.png")
 }
