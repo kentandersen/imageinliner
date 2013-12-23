@@ -1,12 +1,26 @@
 {
-  "name": "image-inliner",
-  "version": "0.0.2",
-  "readme": "empty",
-  "main": "./src/main",
+  "name": "imageinliner",
+  "version": "0.1.0",
+  "main": "./index.js",
+  "description": "Tool for inlining images into css files",
+  "repository": "git://github.com/kentandersen/imageinliner.git",
+  "author": "Kent Andersen",
+  "license": "MIT",
   "bin": {
     "imageinliner": "./bin/imageinliner"
   },
+  "scripts": {
+    "test": "mocha"
+  },
   "dependencies": {
-    "mime": "~1.2.9"
+    "mime": "~1.2.9",
+    "css-parse": "~1.7.0",
+    "css-stringify": "~1.4.1",
+    "optimist": "~0.6.0",
+    "shelljs": "~0.2.6",
+    "mkdirp": "~0.3.5"
+  },
+  "devDependencies": {
+    "mocha": "~1.16.2"
   }
 }
