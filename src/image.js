@@ -69,6 +69,7 @@ var inlineImages = function(imagePaths, cssFilePath, options) {
 
 
 module.exports = function (imagePaths, cssFilePath, options) {
+    options = options || {};
 
     // if maxImageFileSize is defined (0 skips this step)
     // check if all images is is below the legal limit 
