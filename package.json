@@ -1,8 +1,11 @@
 {
   "name": "imageinliner",
   "version": "0.0.1",
-  "readme": "empty",
   "main": "./index.js",
+  "description": "Tool for inlining images into css files",
+  "repository": "git://github.com/kentandersen/imageinliner.git",
+  "author": "Kent Andersen",
+  "license": "MIT",
   "bin": {
     "imageinliner": "./bin/imageinliner"
   },
