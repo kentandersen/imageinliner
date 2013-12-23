@@ -2,6 +2,7 @@ body {
     background: url("image1.png"); 
     font: 1em;
     background: url("image2.png"); 
+    background: blue;
 }
 
 
