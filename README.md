@@ -1,6 +1,6 @@
 ## imageinliner
 
-Tool for inlining data-uri for background images into css files.
+Tool for inlining background data-uri's into css files.
 
 
 ```bash
