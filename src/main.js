@@ -1,49 +1,35 @@
 #!/usr/bin/env node
 
 var fs = require("fs");
-var mime = require("mime");
 var path = require("path");
-var inline = require("./inline");
+var argv = require("optimist").argv;
+var inliner = require("./inliner.js");
 
 
-var basePath = process.env.PWD;
+// map config parameters
+var baseDirectory = process.cwd();
+var inputfile = argv.i || argv.inn;
+inputfile = path.resolve(baseDirectory, inputfile);
 
-var listOfFiles = process.argv.splice(2);
-if(!listOfFiles) {
-    return;
+var outputfile;
+if(argv.overwrite) {
+    outputfile = inputfile;
+} else {
+    outputfile = argv.o || argv.out;
+    if(!outputfile) {
+        throw "no output file defined"
+    }
+
+    outputfile =  path.resolve(baseDirectory, outputfile);
 }
 
-listOfFiles.forEach(function (filePath) {
-    var cssFilePath = path.dirname(path.join(basePath, filePath));
+var cssData = inliner(inputfile, {
+    maxImageFileSize: argv.limit || 61440,
+    rootImagePath: path.resolve(baseDirectory, (argv.root || argv.i || argv.inn)),
+    compressOutput: argv.compress
 
-    var reg = /background.*:.*url\((.*)\)/;
-
-    fs.readFile(filePath, "utf-8", function (err, fileData) {
-        if (err) throw err;
-        
-        var fileMimeType = mime.lookup(filePath);
-        if(fileMimeType !== "text/css") {
-            throw "Filetype has to be css";
-        }
-        
-        var outputFilePath = filePath;
-        var strArray = fileData.split("\n");
-        var modifiedStrArray = strArray.slice(0);
-        var indexOffset = 0;
-        
-        strArray.forEach(function(line, index){
-            var extracted = reg.exec(line);
-            if(extracted && extracted[1]) {
-                if(cssImage = inline.inlineImage(extracted[1], cssFilePath)) {
-                    modifiedStrArray.splice(++indexOffset + index, 0, cssImage);
-                }
-            }
-        });
-
-        fs.writeFile(outputFilePath, modifiedStrArray.join("\n"), function (error) {
-            if (error) throw error;
-            console.log('File saved: ' + outputFilePath);
-        });
-    });
 });
 
+
+//write file
+fs.writeFileSync(outputfile, cssData);

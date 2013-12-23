@@ -10,14 +10,14 @@ var cleanXMLData = function(fileData) {
     fileData = fileData.replace(/<!--[^>]*-->/g, '');
     // remove dubble spaces
     fileData = fileData.replace(/ +(?= )/g,'');
-    // fileData = fileData.replace(/\'/gm,"\'");
+    // changes '' to ""
+    fileData = fileData.replace(/\'/gm, '\"');
 
     return fileData;
 }
 
 
 var getFullPath = function(imagePath, cssFilePath, rootPath) {
-
     if(imagePath.charAt(0) === "/") {
         if(!rootPath) {
             throw "rootPath is not set, but " + imagePath + " requires rootPath";
@@ -29,29 +29,24 @@ var getFullPath = function(imagePath, cssFilePath, rootPath) {
 };
 
 var createCSSBackgroundImage = function(inlineImages) {
-    var css = 'background-image:';
+    if(inlineImages.length === 0) {
+        return;
+    }
 
-    inlineImages.forEach(function(image, index) {
-        if(index !== 0) {
-            css += ","
-        }
-
-        css += "url('data:" + image.mimeType + ";"+ image.encoding +"," + image.imageData + "')";
+    var css = inlineImages.map(function(image) {
+        return  "url('data:" + image.mimeType + ";"+ image.encoding +"," + image.imageData + "')";
     });
-    return css + ';';
+    return css.join(",");
 }
 
+var inlineImages = function(imagePaths, cssFilePath, options) {
 
-module.exports = function (imagePaths, cssFilePath, rootPath) {
-  
-    var inlineImages = [];
-    imagePaths.forEach(function(imagePath) {
+    var inlinedImages = imagePaths.map(function(imagePath) {
         var imageData, encoding;
 
-        var fullImagePath = getFullPath(imagePath, cssFilePath, rootPath);
+        var fullImagePath = getFullPath(imagePath, cssFilePath, options.rootPath);
 
         var mimeType = mime.lookup(fullImagePath);
-
         if(mimeType === "image/svg+xml") {
             imageData = fs.readFileSync(fullImagePath, "utf-8");
             imageData = cleanXMLData(imageData);
@@ -61,15 +56,34 @@ module.exports = function (imagePaths, cssFilePath, rootPath) {
             imageData = fs.readFileSync(fullImagePath).toString('base64');
             encoding = "base64"
         }
-        
-        inlineImages.push({
+
+        return {
             imageData: imageData,
             encoding: encoding,
             mimeType: mimeType
-        });
+        };
     });
 
-    return createCSSBackgroundImage(inlineImages);
+    return createCSSBackgroundImage(inlinedImages);
+};
+
+
+module.exports = function (imagePaths, cssFilePath, options) {
+
+    // if maxImageFileSize is defined (0 skips this step)
+    // check if all images is is below the legal limit 
+    if(options.maxImageFileSize || options.maxImageFileSize > 0) {
+        var allIsBelowLegalLimit = imagePaths.every(function(imagePath) {
+            var fullImagePath = getFullPath(imagePath, cssFilePath, options.rootPath);
+            return fs.statSync(fullImagePath).size < options.maxImageFileSize;
+        });
+
+        if(!allIsBelowLegalLimit) {
+            return;
+        }
+    }
+
+    return inlineImages(imagePaths, cssFilePath, options)
 };
 
 
