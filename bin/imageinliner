@@ -27,8 +27,8 @@ if(argv.overwrite) {
 
 // inline css data
 var cssData = inliner(inputfile, {
-    maxImageFileSize: argv.limit || 61440,
-    rootImagePath: path.resolve(baseDirectory, (argv.root || argv.i || argv.in)),
+    maxImageFileSize: argv.sizeLimit,
+    rootImagePath: path.resolve(baseDirectory, (argv.rootPath || argv.i || argv.in)),
     compressOutput: argv.compress
 });
 
