@@ -1,0 +1,19 @@
+body {
+    background: url("image1.png"); 
+    font: 1em;
+    background: url("image2.png"); 
+}
+
+
+#main {
+    background-image: url("image3.png") ;
+}
+
+
+#main {
+    background: transparent url("image1.png") no-repeat center center, transparent url("image2.png") no-repeat center center, transparent url("image3.png") no-repeat center center;
+
+}
+#main {
+    background-image: url("image1.png")
+}
