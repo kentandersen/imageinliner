@@ -2,9 +2,12 @@
   "name": "imageinliner",
   "version": "0.0.1",
   "readme": "empty",
-  "main": "./src/inliner.js",
+  "main": "./index.js",
   "bin": {
     "imageinliner": "./bin/imageinliner"
+  },
+  "scripts": {
+    "test": "mocha"
   },
   "dependencies": {
     "mime": "~1.2.9",
