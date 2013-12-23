@@ -10,9 +10,11 @@
     "mime": "~1.2.9",
     "css-parse": "~1.7.0",
     "css-stringify": "~1.4.1",
-    "optimist": "~0.6.0"
+    "optimist": "~0.6.0",
+    "shelljs": "~0.2.6",
+    "mkdirp": "~0.3.5"
   },
   "devDependencies": {
-    "rimraf": "2.1"
+    "mocha": "~1.16.2"
   }
 }

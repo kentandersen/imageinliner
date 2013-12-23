@@ -2,13 +2,13 @@
 
 var fs = require("fs");
 var path = require("path");
+var mkdirp = require('mkdirp');
 var argv = require("optimist").argv;
 var inliner = require("./inliner.js");
 
-
 // map config parameters
 var baseDirectory = process.cwd();
-var inputfile = argv.i || argv.inn;
+var inputfile = argv.i || argv.in;
 inputfile = path.resolve(baseDirectory, inputfile);
 
 var outputfile;
@@ -25,11 +25,17 @@ if(argv.overwrite) {
 
 var cssData = inliner(inputfile, {
     maxImageFileSize: argv.limit || 61440,
-    rootImagePath: path.resolve(baseDirectory, (argv.root || argv.i || argv.inn)),
+    rootImagePath: path.resolve(baseDirectory, (argv.root || argv.i || argv.in)),
     compressOutput: argv.compress
 
 });
 
 
 //write file
-fs.writeFileSync(outputfile, cssData);
+mkdirp(path.dirname(outputfile), function (err) {
+    if(err) throw err;
+
+    fs.writeFile(outputfile, cssData, function(err) {
+        if(err) throw err;
+    });
+});
