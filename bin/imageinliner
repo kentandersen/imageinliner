@@ -18,7 +18,7 @@ if(argv.overwrite) {
 } else {
     outputfile = argv.o || argv.out;
     if(!outputfile) {
-        throw "no output file defined"
+        throw "no output file defined";
     }
 
     outputfile =  path.resolve(baseDirectory, outputfile);
@@ -35,9 +35,13 @@ var cssData = inliner(inputfile, {
 
 // write file
 mkdirp(path.dirname(outputfile), function (err) {
-    if(err) throw err;
+    if(err) {
+        throw err;
+    }
 
     fs.writeFile(outputfile, cssData, function(err) {
-        if(err) throw err;
+        if(err) {
+            throw err;
+        }
     });
 });
