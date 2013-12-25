@@ -1,6 +1,6 @@
 var parse = require('css-parse');
 var stringify = require('css-stringify');
-var _ = require("underscore")
+var _ = require("underscore");
 var fs = require("fs");
 var path = require("path");
 var image = require("./image.js");
@@ -40,7 +40,7 @@ var getImageUrl = function (background) {
     });
 
     return imageUrls;
-}
+};
 
 var inlineImages = function(parsedCss, imageBasePath, options) {
     // loop trough all selectors (rules)
@@ -51,7 +51,7 @@ var inlineImages = function(parsedCss, imageBasePath, options) {
         for (var i = 0; i < declarations.length; i++) {
             var declaration = declarations[i];
 
-            // find background declarations, 
+            // find background declarations,
             if(declaration.property.indexOf("background") > -1) {
 
                 // with a url()
@@ -59,7 +59,7 @@ var inlineImages = function(parsedCss, imageBasePath, options) {
                 if(backgroundImages.length === 0) {
                     break;
                 }
-                
+
                 // where images is below the legal maxImageFileSize
                 var inlinedBackground = image(backgroundImages, imageBasePath, options);
                 if(!inlinedBackground) {
@@ -72,11 +72,11 @@ var inlineImages = function(parsedCss, imageBasePath, options) {
                     property: 'background-image',
                     value: inlinedBackground
                 });
-                
+
                 // and skip the newly added for next run-loop
                 i++;
             }
-        };
+        }
     });
 };
 

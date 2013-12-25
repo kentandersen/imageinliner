@@ -14,7 +14,7 @@ var cleanXMLData = function(fileData) {
     fileData = fileData.replace(/\'/gm, '\"');
 
     return fileData;
-}
+};
 
 
 var getFullPath = function(imagePath, cssFilePath, rootPath) {
@@ -37,7 +37,7 @@ var createCSSBackgroundImage = function(inlineImages) {
         return  "url('data:" + image.mimeType + ";"+ image.encoding +"," + image.imageData + "')";
     });
     return css.join(",");
-}
+};
 
 var inlineImages = function(imagePaths, cssFilePath, options) {
 
@@ -54,7 +54,7 @@ var inlineImages = function(imagePaths, cssFilePath, options) {
 
         } else {
             imageData = fs.readFileSync(fullImagePath).toString('base64');
-            encoding = "base64"
+            encoding = "base64";
         }
 
         return {
@@ -84,7 +84,7 @@ module.exports = function (imagePaths, cssFilePath, options) {
         }
     }
 
-    return inlineImages(imagePaths, cssFilePath, options)
+    return inlineImages(imagePaths, cssFilePath, options);
 };
 
 
