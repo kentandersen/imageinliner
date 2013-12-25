@@ -3,7 +3,7 @@ var path = require("path");
 var assert = require("assert")
 require('shelljs/global');
 
-    
+
 describe('cli interface', function() {
     var inputFile = "test/fixtures/fixture.css";
 
@@ -49,7 +49,7 @@ describe('cli interface', function() {
         cp("-r", copiedFolder, outputFolder);
 
         var copiedFile = path.join(outputFolder, "fixtures", "fixture.css");
-        
+
         exec("./bin/imageinliner -i "+ inputFile +" -o " + outputFile);
         exec("./bin/imageinliner -i "+ copiedFile +" --overwrite");
 

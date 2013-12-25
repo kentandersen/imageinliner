@@ -51,7 +51,7 @@ var inlineImages = function(imagePaths, cssFilePath, options) {
             imageData = fs.readFileSync(fullImagePath, "utf-8");
             imageData = cleanXMLData(imageData);
             encoding = "utf-8";
-            
+
         } else {
             imageData = fs.readFileSync(fullImagePath).toString('base64');
             encoding = "base64"
@@ -72,7 +72,7 @@ module.exports = function (imagePaths, cssFilePath, options) {
     options = options || {};
 
     // if maxImageFileSize is defined (0 skips this step)
-    // check if all images is is below the legal limit 
+    // check if all images is is below the legal limit
     if(options.maxImageFileSize || options.maxImageFileSize > 0) {
         var allIsBelowLegalLimit = imagePaths.every(function(imagePath) {
             var fullImagePath = getFullPath(imagePath, cssFilePath, options.rootPath);

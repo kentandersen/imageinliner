@@ -25,7 +25,7 @@ imageinliner will reformat the css (line breaks and indentations). To preserve c
 imageinliner -i style.css -o outputStyle.css --compress
 ```
 
-Size of embedded code is somewhat larger than size of image by itself. Best performance can be achieved for smaller files, where the http setup accounts for a large portion of the transfer. Inlining files above 10k is not recommended. 
+Size of embedded code is somewhat larger than size of image by itself. Best performance can be achieved for smaller files, where the http setup accounts for a large portion of the transfer. Inlining files above 10k is not recommended.
 
 Pass a limiter (in byte) using the `--sizeLimit` parameter to exclude images above the sizeLimit.
 
@@ -33,7 +33,7 @@ Pass a limiter (in byte) using the `--sizeLimit` parameter to exclude images abo
 imageinliner -i style.css -o outputStyle.css --sizeLimit 10240
 ```
 
-The imageinliner module can also be used within node. 
+The imageinliner module can also be used within node.
 
 ```javascript
 var inliner = require("imageinliner");
