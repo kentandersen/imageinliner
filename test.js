@@ -29,21 +29,20 @@ target.all = function() {
 
 target.jshint = function() {
     var files = glob.sync(path.join(webapp, '*.js'));
+    files.push(path.join('bin', 'imageinliner'));
 
     section('Running JSHint');
     bin('jshint', ['--config ' + jshintConfig, files.join(' ')]);
 };
 
 target.test = function() {
-    var files = glob.sync(path.join(webapp, '*.js'));
-
-    section('Running tests');
     var res = exec('mocha');
     done(res);
 };
 
 
 /*** HELPERS ********/
+
 var bin = function(name, arguments, options) {
     var res = npmBin(name, arguments, options)
     done(res);
