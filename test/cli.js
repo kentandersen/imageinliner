@@ -18,6 +18,11 @@ describe('cli interface', function() {
         rm("-fr", outputFolder);
     });
 
+    it("should run correctly", function() {
+        var res = exec("./bin/imageinliner -i "+ inputFile +" -o " + outputFile);
+        assert.equal(res.code, 0);
+    });
+
     it("should create output file", function() {
         exec("./bin/imageinliner -i "+ inputFile +" -o " + outputFile);
 
