@@ -1,20 +1,20 @@
 body {
-    background: url("image1.png"); 
+    background: url("image1.png");
     font: 1em;
-    background: url("image2.png"); 
+    background: url("image2.png");
     background: blue;
 }
 
 
-#main {
+#main1 {
     background-image: url("image3.png") ;
 }
 
 
-#main {
+#main2 {
     background: transparent url("image1.png") no-repeat center center, transparent url("image2.png") no-repeat center center, transparent url("image3.png") no-repeat center center;
 
 }
-#main {
+#main3 {
     background-image: url("image1.png")
 }
