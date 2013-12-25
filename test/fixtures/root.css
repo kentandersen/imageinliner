@@ -1,0 +1,20 @@
+body {
+    background: url("/fixtures/image1.png");
+    font: 1em;
+    background: url("/fixtures/image2.png");
+    background: blue;
+}
+
+
+#main1 {
+    background-image: url("/fixtures/image3.png") ;
+}
+
+
+#main2 {
+    background: transparent url("/fixtures/image1.png") no-repeat center center, transparent url("/fixtures/image2.png") no-repeat center center, transparent url("/fixtures/image3.png") no-repeat center center;
+
+}
+#main3 {
+    background-image: url("/fixtures/image1.png")
+}
