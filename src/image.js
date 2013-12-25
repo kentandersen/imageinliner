@@ -20,7 +20,7 @@ var cleanXMLData = function(fileData) {
 var getFullPath = function(imagePath, cssFilePath, rootPath) {
     if(imagePath.charAt(0) === "/") {
         if(!rootPath) {
-            throw "rootPath is not set, but " + imagePath + " requires rootPath";
+            throw "rootPath is not set, but " + imagePath + " requires rootImagePath";
         }
         return path.join(rootPath, imagePath);
     } else {
@@ -44,7 +44,7 @@ var inlineImages = function(imagePaths, cssFilePath, options) {
     var inlinedImages = imagePaths.map(function(imagePath) {
         var imageData, encoding;
 
-        var fullImagePath = getFullPath(imagePath, cssFilePath, options.rootPath);
+        var fullImagePath = getFullPath(imagePath, cssFilePath, options.rootImagePath);
 
         var mimeType = mime.lookup(fullImagePath);
         if(mimeType === "image/svg+xml") {
@@ -75,7 +75,7 @@ module.exports = function (imagePaths, cssFilePath, options) {
     // check if all images is is below the legal limit
     if(options.maxImageFileSize || options.maxImageFileSize > 0) {
         var allIsBelowLegalLimit = imagePaths.every(function(imagePath) {
-            var fullImagePath = getFullPath(imagePath, cssFilePath, options.rootPath);
+            var fullImagePath = getFullPath(imagePath, cssFilePath, options.rootImagePath);
             return fs.statSync(fullImagePath).size < options.maxImageFileSize;
         });
 
@@ -83,7 +83,6 @@ module.exports = function (imagePaths, cssFilePath, options) {
             return;
         }
     }
-
     return inlineImages(imagePaths, cssFilePath, options);
 };
 
