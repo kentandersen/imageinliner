@@ -5,21 +5,18 @@ var _ = require("underscore");
 describe('inliner with fixture', function(){
 
     var assertInliner = function(cssFile, options) {
-        var result;
-        beforeEach(function () {
-            result = inliner(cssFile, _.defaults(options || {}, {
+
+        var buildArguments = function(options) {
+            return _.defaults(options || {}, {
                 maxImageFileSize:   10240,
                 compressOutput:     true
-            }));
-        });
+            });
+        };
 
         it("should return string", function() {
+            result = inliner(cssFile, buildArguments(options));
             assert.equal(typeof result, "string");
         });
-
-        // it("should return string", function() {
-        //     assert.equal(typeof result, "string");
-        // });
     };
 
     assertInliner("test/fixtures/style.css");
