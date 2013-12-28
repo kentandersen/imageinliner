@@ -18,3 +18,8 @@ body {
 #main3 {
     background-image: url("image1.png")
 }
+
+@media (min-width: 400px) {
+    #application{width:400px;margin:0 auto;
+    }
+}
