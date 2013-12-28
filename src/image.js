@@ -8,8 +8,9 @@ var cleanXMLData = function(fileData) {
     fileData = fileData.replace(/(\r\n|\n|\r)/gm,'');
     // removes xml comments
     fileData = fileData.replace(/<!--[^>]*-->/g, '');
-    // remove dubble spaces
-    fileData = fileData.replace(/ +(?= )/g,'');
+    // remove double whitespace
+    fileData = fileData.replace(/\s/g, ' ');
+    fileData = fileData.replace(/\s{2,}/g, ' ');
     // changes '' to ""
     fileData = fileData.replace(/\'/gm, '\"');
 
