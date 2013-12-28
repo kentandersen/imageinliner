@@ -20,7 +20,7 @@
     "maxparams": 15,
     "maxdepth": 5,
     "maxstatements": 15,
-    "maxcomplexity": 5,
+    "maxcomplexity": 7,
     "maxlen": 120,
     "globals": {
         "define": true,
