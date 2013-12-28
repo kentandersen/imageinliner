@@ -6,9 +6,36 @@ var cssImage = require("../src/image.js");
 
 describe('image', function(){
 
+    it("should return string", function() {
+        var cssBackgroundsPng = cssImage([ 'fixtures/image1.png',], "test");
+        assert.equal(typeof cssBackgroundsPng, "string");
+
+        var cssBackgroundsSvg = cssImage([ 'fixtures/image4.svg',], "test");
+        assert.equal(typeof cssBackgroundsSvg, "string");
+    });
+
+    it("should return string on one line", function() {
+        var cssBackgroundsPng = cssImage([ 'fixtures/image1.png',], "test");
+        assert.equal(cssBackgroundsPng.match(/\n/g), null);
+
+        var cssBackgroundsSvg = cssImage([ 'fixtures/image4.svg',], "test");
+        assert.equal(cssBackgroundsSvg.match(/\n/g), null);
+    });
+
     it("should return css inlined background from filepath", function() {
         var cssBackgrounds = cssImage([ 'fixtures/image1.png',], "test");
         assert.equal(cssBackgrounds, "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAAXNSR0ICQMB9xQAAAANQTFRFAAAAp3o92gAAAAF0Uk5TAEDm2GYAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVxAAAADUlEQVQoz2NgGAXIAAABEAAB4vyuKAAAAABJRU5ErkJggg==')");
+    });
+
+    it("should replace \' with \" in svg files", function() {
+        var cssBackgrounds = cssImage([ 'fixtures/image1.png',], "test");
+        // inlined uri contains two ' by default url('data:image/svg+xml;utf-8,<?xml>');
+        assert.equal(cssBackgrounds.match(/\'/g).length, 2);
+    });
+
+    it("should return css inlined background from svg", function() {
+        var cssBackgrounds = cssImage([ 'fixtures/image4.svg',], "test");
+        assert.equal(cssBackgrounds, 'url(\'data:image/svg+xml;utf-8,<?xml version="1.0" encoding="iso-8859-1"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20px" height="32px" viewBox="0 0 20 32" style="enable-background:new 0 0 20 32;" xml:space="preserve"><g id="Layer_1"></g><g id="lightbulb"></g></svg>\')');
     });
 
     it("should return css inlined background from root filepath", function() {
