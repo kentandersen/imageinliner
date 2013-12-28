@@ -18,8 +18,13 @@ body {
 #main3 {
     background-image: url("/fixtures/image1.png")
 }
+#main4 {
+    background-image: url("/fixtures/image4.svg");
+}
 
 @media (min-width: 400px) {
-    #application{width:400px;margin:0 auto;
+    #application {
+        width: 400px;
+        margin: 0 auto;
     }
 }
