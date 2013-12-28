@@ -47,8 +47,13 @@ var inlineImages = function(parsedCss, imageBasePath, options) {
     _.each(parsedCss.stylesheet.rules, function(rule, index) {
         var declarations = rule.declarations;
 
+        // skip for mediaqueries etc
+        if(rule.type !== 'rule' || !declarations) {
+            return;
+        }
+
         // and then all declarations for that selector
-        for (var i = 0; i < declarations.length; i++) {
+        for (var i = 0, length = declarations.length; i < length; i++) {
             var declaration = declarations[i];
 
             // find background declarations,
@@ -72,7 +77,9 @@ var inlineImages = function(parsedCss, imageBasePath, options) {
                     property: 'background-image',
                     value: inlinedBackground
                 });
+                // add to length of the array
 
+                length++;
                 // and skip the newly added for next run-loop
                 i++;
             }
