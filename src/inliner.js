@@ -57,7 +57,7 @@ var inlineImages = function(parsedCss, imageBasePath, options) {
             var declaration = declarations[i];
 
             // find background declarations,
-            if(declaration.property.indexOf("background") > -1) {
+            if(declaration.property && declaration.property.indexOf("background") > -1) {
 
                 // with a url()
                 var backgroundImages = getImageUrl(declaration.value);
