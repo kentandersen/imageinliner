@@ -27,5 +27,6 @@ body {
     #application {
         width: 400px;
         margin: 0 auto;
+        background-image: url("image3.png");
     }
 }
