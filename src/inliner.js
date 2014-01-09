@@ -42,48 +42,57 @@ var getImageUrl = function (background) {
     return imageUrls;
 };
 
-var inlineImages = function(parsedCss, imageBasePath, options) {
-    // loop trough all selectors (rules)
-    _.each(parsedCss.stylesheet.rules, function(rule, index) {
-        var declarations = rule.declarations;
+var inlineDeclarations = function(declarations, imageBasePath, options) {
+    if(!declarations) {
+        return;
+    }
 
-        // skip for mediaqueries etc
-        if(rule.type !== 'rule' || !declarations) {
-            return;
-        }
+    // Take all declarations for that selector
+    for (var i = 0, length = declarations.length; i < length; i++) {
+        var declaration = declarations[i];
 
-        // and then all declarations for that selector
-        for (var i = 0, length = declarations.length; i < length; i++) {
-            var declaration = declarations[i];
+        // find background declarations,
+        if(declaration.property && declaration.property.indexOf("background") > -1) {
 
-            // find background declarations,
-            if(declaration.property && declaration.property.indexOf("background") > -1) {
-
-                // with a url()
-                var backgroundImages = getImageUrl(declaration.value);
-                if(backgroundImages.length === 0) {
-                    break;
-                }
-
-                // where images is below the legal maxImageFileSize
-                var inlinedBackground = image(backgroundImages, imageBasePath, options);
-                if(!inlinedBackground) {
-                    break;
-                }
-
-                // and add data-uri background images declatration after the current
-                declarations.splice(i+1, 0, {
-                    type: 'declaration',
-                    property: 'background-image',
-                    value: inlinedBackground
-                });
-                // add to length of the array
-
-                length++;
-                // and skip the newly added for next run-loop
-                i++;
+            // with a url()
+            var backgroundImages = getImageUrl(declaration.value);
+            if(backgroundImages.length === 0) {
+                break;
             }
+
+            // where images is below the legal maxImageFileSize
+            var inlinedBackground = image(backgroundImages, imageBasePath, options);
+            if(!inlinedBackground) {
+                break;
+            }
+
+            // and add data-uri background images declatration after the current
+            declarations.splice(i+1, 0, {
+                type: 'declaration',
+                property: 'background-image',
+                value: inlinedBackground
+            });
+            // add to length of the array
+
+            length++;
+            // and skip the newly added for next run-loop
+            i++;
         }
+    }
+};
+
+var inlineImages = function(cssRules, imageBasePath, options) {
+    // loop trough all selectors (rules)
+    _.each(cssRules, function(rules, index) {
+        var declarations = rules.declarations;
+
+        // recursive loop for nested rules
+        if(rules.rules) {
+            inlineImages(rules.rules, imageBasePath, options);
+        }
+
+        inlineDeclarations(declarations, imageBasePath, options);
+
     });
 };
 
@@ -93,7 +102,7 @@ module.exports = function (cssFile, options) {
     var cssData = fs.readFileSync(cssFile, "utf-8");
     var parsedCss = parse(cssData);
 
-    inlineImages(parsedCss, path.dirname(cssFile), options);
+    inlineImages(parsedCss.stylesheet.rules, path.dirname(cssFile), options);
 
     return stringify(parsedCss, { compress: options.compressOutput });
 };
