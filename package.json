@@ -1,6 +1,6 @@
 {
   "name": "imageinliner",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "./index.js",
   "description": "Tool for inlining images into css files",
   "repository": "git://github.com/kentandersen/imageinliner.git",
