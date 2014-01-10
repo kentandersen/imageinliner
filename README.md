@@ -1,6 +1,6 @@
 ## imageinliner
 
-[![Build Status](https://api.travis-ci.org/kentandersen/imageinliner.png](https://travis-ci.org/kentandersen/imageinliner)
+[![Build Status](https://api.travis-ci.org/kentandersen/imageinliner.png)](https://travis-ci.org/kentandersen/imageinliner)
 
 Tool for inlining background data-uri's into css files.
 
