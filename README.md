@@ -2,6 +2,10 @@
 
 [![Build Status](https://api.travis-ci.org/kentandersen/imageinliner.png)](https://travis-ci.org/kentandersen/imageinliner)
 
+```bash
+npm install -g imageinliner
+```
+
 Tool for inlining background data-uri's into css files.
 
 
