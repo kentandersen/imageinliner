@@ -87,13 +87,25 @@ var inlineImages = function(parsedCss, imageBasePath, options) {
     });
 };
 
-
-module.exports = function (cssFile, options) {
+var process = function(css, imageBasePath, options) {
     options = options || {};
-    var cssData = fs.readFileSync(cssFile, "utf-8");
-    var parsedCss = parse(cssData);
+    var parsedCss = parse(css);
 
-    inlineImages(parsedCss, path.dirname(cssFile), options);
+    inlineImages(parsedCss, imageBasePath, options);
 
     return stringify(parsedCss, { compress: options.compressOutput });
+};
+
+exports.css = function (css, options) {
+    if(!options.imageBasePath) {
+        throw "imageBasePath has to be set in order to find image files";
+    }
+
+    return process(css, options.imageBasePath, options);
+};
+
+exports.file = function (cssFile, options) {
+    var cssData = fs.readFileSync(cssFile, "utf-8");
+
+    return process(cssData, path.dirname(cssFile), options);
 };
