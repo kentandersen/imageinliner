@@ -35,10 +35,23 @@ imageinliner -i style.css -o outputStyle.css --sizeLimit 10240
 
 The imageinliner module can also be used within node.
 
+with file path
 ```javascript
 var inliner = require("imageinliner");
 
-var cssData = inliner("style.css", {
+var cssData = inliner.file("style.css", {
+    maxImageFileSize:   10240,
+    imageBasePath:      "some/directory/images"
+    rootImagePath:      "some/directory",
+    compressOutput:     true
+});
+```
+
+with css string
+```javascript
+var inliner = require("imageinliner");
+
+var cssData = inliner.css(css, {
     maxImageFileSize:   10240,
     rootImagePath:      "some/directory",
     compressOutput:     true
