@@ -96,21 +96,21 @@ var inlineImages = function(cssRules, imageBasePath, options) {
     });
 };
 
-var process = function(css, imageBasePath, options) {
+var process = function(css, cssBasePath, options) {
     options = options || {};
     var parsedCss = parse(css);
 
-    inlineImages(parsedCss.stylesheet.rules, imageBasePath, options);
+    inlineImages(parsedCss.stylesheet.rules, cssBasePath, options);
 
     return stringify(parsedCss, { compress: options.compressOutput });
 };
 
 exports.css = function (css, options) {
-    if(!options.imageBasePath) {
-        throw "imageBasePath has to be set in order to find image files";
+    if(!options.cssBasePath) {
+        throw "cssBasePath has to be set in order to find image files";
     }
 
-    return process(css, options.imageBasePath, options);
+    return process(css, options.cssBasePath, options);
 };
 
 exports.file = function (cssFile, options) {

@@ -10,7 +10,7 @@ describe('inliner with fixture', function(){
 
         var buildArguments = function(options) {
             return _.defaults(options || {}, {
-                imageBasePath:      "test/fixtures",
+                cssBasePath:        "test/fixtures",
                 maxImageFileSize:   10240,
                 compressOutput:     true
             });
