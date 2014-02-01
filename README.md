@@ -47,7 +47,6 @@ var inliner = require("imageinliner");
 
 var cssData = inliner.file("style.css", {
     maxImageFileSize:   10240,
-    imageBasePath:      "some/directory/images"
     rootImagePath:      "some/directory",
     compressOutput:     true
 });
@@ -59,6 +58,7 @@ var inliner = require("imageinliner");
 
 var cssData = inliner.css(css, {
     maxImageFileSize:   10240,
+    cssBasePath:        "some/directory/css"
     rootImagePath:      "some/directory",
     compressOutput:     true
 });
