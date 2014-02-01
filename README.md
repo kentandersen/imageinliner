@@ -1,5 +1,11 @@
 ## imageinliner
 
+[![Build Status](https://api.travis-ci.org/kentandersen/imageinliner.png)](https://travis-ci.org/kentandersen/imageinliner)
+
+```bash
+npm install -g imageinliner
+```
+
 Tool for inlining background data-uri's into css files.
 
 
@@ -65,7 +71,7 @@ var cssData = inliner.css(css, {
 
 The MIT License (MIT)
 
-Copyright (c) 2013 Kent Andersen &lt;kentareandersen@gmail.com&gt;
+Copyright (c) 2014 Kent Andersen &lt;kentareandersen@gmail.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
