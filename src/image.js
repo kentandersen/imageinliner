@@ -13,6 +13,9 @@ var cleanXMLData = function(fileData) {
     fileData = fileData.replace(/\s{2,}/g, ' ');
     // changes '' to ""
     fileData = fileData.replace(/\'/gm, '\"');
+    // escape # (firefox stupidness)
+    fileData = fileData.replace(/#/gm, '%23');
+
 
     return fileData;
 };
