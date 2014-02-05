@@ -37,6 +37,7 @@ target.jshint = function() {
 
 target.test = function() {
     var res = exec('mocha');
+    echo();
     done(res);
 };
 
