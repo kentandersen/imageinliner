@@ -1,6 +1,6 @@
 {
   "name": "imageinliner",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "./index.js",
   "description": "Tool for inlining images into css files",
   "repository": "git://github.com/kentandersen/imageinliner.git",
@@ -18,7 +18,7 @@
     "css-stringify": "~1.4.1",
     "optimist": "~0.6.0",
     "mkdirp": "~0.3.5",
-    "underscore": "~1.5.2"
+    "underscore": ">=1.5.2"
   },
   "devDependencies": {
     "mocha": "~1.16.2",
