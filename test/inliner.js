@@ -50,6 +50,8 @@ describe('inliner with fixture', function(){
 
     assertInlinerFile("test/fixtures/style.css", 9);
     assertInlinerFile("test/fixtures/compressed.css", 8);
+    assertInlinerString("test/fixtures/alreadyInlined.css", 6);
+
     assertInlinerFile("test/fixtures/root.css", 9, {
         rootImagePath: "test"
     });

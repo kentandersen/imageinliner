@@ -36,7 +36,11 @@ var getImageUrl = function (background) {
         var imagePath = extracted[1];
         imagePath = imagePath.replace(/\"|\'/g, "");
 
-        imageUrls.push(imagePath);
+        // do not inline images already inlined
+        // starting with data:
+        if(imagePath.indexOf("data:") !== 0) {
+            imageUrls.push(imagePath);
+        }
     });
 
     return imageUrls;
