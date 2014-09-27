@@ -17,12 +17,12 @@ describe('inliner with fixture', function(){
         };
 
         it("should return string when using files", function() {
-            result = inliner.css(css, buildArguments(options));
+            var result = inliner.css(css, buildArguments(options));
             assert.equal(typeof result, "string");
         });
 
         it("should inline correct amount of backgrounds", function() {
-            result = inliner.css(css, buildArguments(options));
+            var result = inliner.css(css, buildArguments(options));
             assert.equal(result.match(/url\(\'data/g).length, totalBackgrounds);
         });
     };
@@ -38,12 +38,12 @@ describe('inliner with fixture', function(){
         };
 
         it("should return string", function() {
-            result = inliner.file(cssFile, buildArguments(options));
+            var result = inliner.file(cssFile, buildArguments(options));
             assert.equal(typeof result, "string");
         });
 
         it("should inline correct amount of backgrounds", function() {
-            result = inliner.file(cssFile, buildArguments(options));
+            var result = inliner.file(cssFile, buildArguments(options));
             assert.equal(result.match(/url\(\'data/g).length, totalBackgrounds);
         });
     };
