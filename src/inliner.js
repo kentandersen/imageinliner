@@ -1,6 +1,5 @@
 var parse = require('css-parse');
 var stringify = require('css-stringify');
-var _ = require("underscore");
 var fs = require("fs");
 var path = require("path");
 var image = require("./image.js");
@@ -87,7 +86,7 @@ var inlineDeclarations = function(declarations, imageBasePath, options) {
 
 var inlineImages = function(cssRules, imageBasePath, options) {
     // loop trough all selectors (rules)
-    _.each(cssRules, function(rules, index) {
+    cssRules.forEach(function(rules, index) {
         var declarations = rules.declarations;
 
         // recursive loop for nested rules
